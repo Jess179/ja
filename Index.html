@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Special Someone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .login-form {
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .home-page {
+            padding: 40px 30px;
+            display: none;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff6b6b;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        h2 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            border-color: #ff6b6b;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+        }
+
+        button {
+            background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            color: #ff6b6b;
+            font-weight: 500;
+            min-height: 24px;
+        }
+
+        .heart {
+            color: #ff6b6b;
+            font-size: 24px;
+            margin: 0 5px;
+        }
+
+        .welcome-text {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .special-message {
+            background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .logout-btn {
+            background: transparent;
+            color: #ff6b6b;
+            border: 2px solid #ff6b6b;
+            margin-top: 30px;
+        }
+
+        .logout-btn:hover {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .decoration {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .decoration span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: #ff6b6b;
+            border-radius: 50%;
+            margin: 0 5px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .decoration span:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .decoration span:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart-float {
+            position: absolute;
+            color: rgba(255, 107, 107, 0.5);
+            font-size: 20px;
+            animation: float 15s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="hearts-container"></div>
+    
+    <div class="container">
+        <div class="login-form" id="loginForm">
+            <h1>For My Special Someone <span class="heart">♥</span></h1>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter your username">
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+            <button id="loginBtn">Log In</button>
+            <div class="message" id="message"></div>
+        </div>
+
+        <div class="home-page" id="homePage">
+            <h1>Welcome, Janet <span class="heart">♥</span></h1>
+            <div class="decoration">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="welcome-text">
+                <p>This special place was created just for you.</p>
+                <p>You bring so much joy and happiness into my life.</p>
+            </div>
+            <div class="special-message">
+                <p>Every moment with you is a treasure. You are the most amazing person I know, and I'm so grateful to have you in my life.</p>
+            </div>
+            <button class="logout-btn" id="logoutBtn">Log Out</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const homePage = document.getElementById('homePage');
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const message = document.getElementById('message');
+            const heartsContainer = document.getElementById('hearts-container');
+            
+            // Create floating hearts
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart-float');
+                heart.innerHTML = '♥';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heartsContainer.appendChild(heart);
+            }
+            
+            loginBtn.addEventListener('click', function() {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                if (username === 'janet' && password === 'janet143') {
+                    loginForm.style.display = 'none';
+                    homePage.style.display = 'flex';
+                    message.textContent = '';
+                } else {
+                    message.textContent = 'Incorrect username or password. Please try again.';
+                }
+            });
+            
+            logoutBtn.addEventListener('click', function() {
+                homePage.style.display = 'none';
+                loginForm.style.display = 'flex';
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+            });
+            
+            // Allow pressing Enter to submit the form
+            document.getElementById('password').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    loginBtn.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
